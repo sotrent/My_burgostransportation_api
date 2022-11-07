@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+#MORE THAT isti
+  #Now, rewrite to HTTPS:
+  #RewriteCond %{HTTPS} off
+  #RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  RewriteEngine on
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^$ public/     [L]
+  RewriteRule (.*) public/$1 [L]
+</IfModule>
