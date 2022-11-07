@@ -1,0 +1,233 @@
+<?php
+foreach (glob("/../Modules/*.php") as $filename){
+    include $filename;
+}
+use Modules\DESIGN;
+?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>SAOI</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <?php  echo DESIGN::getBasicLibrary();  ?>
+    <link href="/lib/css/calentim.min.css" rel="stylesheet"/>
+    <script src="/lib/js/moment.min.js"></script>
+    <script src="/lib/js/calentim.min.js"></script>
+    <style>
+      .ui.paddingless.segment{
+        padding: 0 !important;
+      }
+      .configView{
+        padding: 10px 0px 0px 0px !important;;
+      }
+    </style>
+    <script>
+      var userTarget=0;
+    </script>
+  </head>
+  <body>
+    <div class="pusher">
+      <?php // echo DESIGN::renderMenuDesk(4);  ?>
+      <div class="configView">
+        <div class="ui raised segment">
+          <div class="ui grey top attached label">
+             <h4> <i class="user icon"></i>USUARIOS</h4>
+          </div>
+          <div class="lildivider"></div>
+          <div class="">
+            <div class="flotaizq jalarriba">
+              <div class="ui mini icon green button" onclick="addAgent()">
+                <i class="plus icon"></i>&ensp;Nuevo
+              </div>
+            </div>
+            <div class="flotader jalarriba">
+              <div class="ui  icon search" >
+                <div class="ui right action mini input">
+                  <input type="text" name="findt" id="findt" placeholder="Nombre o Referencia" autocomplete="off" >
+                  <a class="ui blue mini button" title="Buscar" onclick="showList('target',$('#findt').val())">
+                    &ensp;<i class="ui search icon"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="">&ensp;</div>
+          </div>
+          <div class="ui divider"></div>
+          <table class="ui selectable celled table" id="example">
+            <thead>
+              <tr align="center">
+                <td class="two wide subtitleBlack">Usuario</td>
+                <td class="two wide subtitleBlack">Nombre</td>
+                <td class="one wide subtitleBlack">Email</td>
+                <td class="one wide subtitleBlack">Tipo</td>
+                <td class="two wide subtitleBlack">Permisos</td>
+                <td class="two wide subtitleBlack">Estatus</td>
+              </tr>
+            </thead>
+            <tbody id="datamaster" style="font-size: .8rem;"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui mini viewAddAgnt basic modal">
+      <i class="icon close" style="display:none;" id="closmodview"></i>
+      <div class="ui segment" id="frmnewoff">
+        <div class="ui top attached blue label">
+          <div class="flotaizq">
+            Nuevo Usuario
+          </div>
+          <div class="flotader"><i class="icon close" onclick="$('#closmodview').trigger('click')"></i></div>
+        </div>
+        <div class="ui setNewAgent form">
+          <input type="hidden" name="agtOpc" id="agtOpc" value="nuevo">
+          <div class="field">
+            <label for="">Usuario</label>
+            <input type="text" name="agtCode" id="agtCode" value=""placeholder="ej. agente1" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="">Nombre</label>
+            <input type="text" name="agtName" id="agtName" value=""placeholder="ej. Juan Topo" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="">Email</label>
+            <input type="text" name="agtEmail" id="agtEmail" value=""placeholder="ej. agente1@browns.com" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="">Cotraseña</label>
+            <input type="text" name="agtPass" id="agtPass" value=""placeholder="ej. Mipass200" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="">Tipo</label>
+            <select name="agtTipo" id="agtTipo" class="ui dropdown mini input">
+              <option value="agente">Agente</option>
+              <option value="trafico">Trafico</option>
+              <option value="administrador">Administrador</option>
+            </select>
+          </div>
+          <div class="field" align="center">
+            <div class="ui blue submit mini button">
+              Guardar&ensp;<i class="save icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui mini viewEditAgnt basic modal">
+      <i class="icon close" style="display:none;" id="closmodview2"></i>
+      <div class="ui segment" id="frmnewoff">
+        <div class="ui top attached blue label">
+          <div class="flotaizq">
+            Editar Usuario
+          </div>
+          <div class="flotader"><i class="icon close" onclick="$('#closmodview2').trigger('click')"></i></div>
+        </div>
+        <div class="ui setEditAgent form">
+          <input type="hidden" name="agtEdtOpc" id="agtEdtOpc" value="editAgent">
+          <input type="hidden" name="agtEdtCode" id="agtEdtCode"  autocomplete="off">
+          <div class="field">
+            <label for="">Usuario:&ensp;
+              <span class="subtitleBlack" align="left" id="lblAgtEdtCode"></span>
+            </label>
+          </div>
+          <div class="field">
+            <label for="">Nombre</label>
+            <input type="text" name="agtEdtName" id="agtEdtName" value=""placeholder="ej. Juan Topo" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="">Email</label>
+            <input type="text" name="agtEdtEmail" id="agtEdtEmail" value=""placeholder="ej. agente1@browns.com" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="">Contraseña</label>
+            <input type="text" name="agtEdtPass" id="agtEdtPass" value=""placeholder="ej. Mipass200" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="">Tipo</label>
+            <select name="agtEdtTipo" id="agtEdtTipo" class="ui dropdown mini input">
+              <option value="agente">Agente</option>
+              <option value="trafico">Trafico</option>
+              <option value="administrador">Administrador</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="">Estatus</label>
+            <select name="agtEdtStat" id="agtEdtStat" class="ui dropdown mini input">
+              <option value="1">Activo</option>
+              <option value="0">Inactivo</option>
+            </select>
+          </div>
+          <div class="field" align="right">
+            <div class="ui red mini button" onclick="delAgent()">
+              Eliminar&ensp;<i class="trash icon"></i>
+            </div>
+            <div class="ui blue submit mini button">
+              Guardar&ensp;<i class="save icon"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <?php echo DESIGN::getExtendedLibrary(); ?>
+    <script src="/lib/js/globalAgents.js?de=55"></script>
+
+    <script type="text/javascript">
+     showList();
+      function addAgent(){
+        $('.ui.viewAddAgnt.modal').modal('show');
+      }
+      function editAgent(cual){
+        getInfoAgent(cual);
+        userTarget=cual;
+        $('.ui.viewEditAgnt.modal').modal('show');
+      }
+      $(".bgt").click(function(){
+        $(".bgt").removeClass('active');
+        $(this).addClass('active');
+      });
+
+      $('.ui.setNewAgent.form').form({ fields:{
+          agtName:{ identifier:'agtName', rules:[{ type   : 'empty',      prompt : ''}]},
+          agtCode:{ identifier:'agtCode', rules:[{ type   : 'empty', prompt : ''}]},
+          agtEmail:{ identifier:'agtEmail', rules:[{ type   : 'empty', prompt : ''}]},
+          agtPass:{ identifier:'agtPass', rules:[{ type   : 'empty', prompt : ''}]}
+        },onSuccess: function(event, fields){
+        //  cargaloader("etLoader");
+            $.ajax({
+              url: "/setUserData", type: 'POST', data: fields ,
+              success: function(data) {
+                if(data==1){
+                  tostadora(1,"Usuario creado correctamente");
+                  showList();
+                  $('.ui.viewAddAgnt.modal').modal('hide');
+                }else{
+                  tostadora(4,"Uno o varios registros no se guardaron, verifique su informacion");                }
+                  //  cargaloader("etLoader");
+              }
+            });
+      }});
+
+      $('.ui.setEditAgent.form').form({ fields:{
+          agtEdtName:{ identifier:'agtEdtName', rules:[{ type   : 'empty',      prompt : ''}]},
+          agtEdtEmail:{ identifier:'agtEdtEmail', rules:[{ type   : 'empty', prompt : ''}]}
+        },onSuccess: function(event, fields){
+            $.ajax({
+              url: "/setUserData", type: 'POST', data: fields ,
+              success: function(data) {
+                if(data==1){
+                  tostadora(1,"Usuario editado correctamente");
+                  $('.ui.viewEditAgnt.modal').modal('hide');
+                  showList();
+                }else{
+                  tostadora(4,"Uno o varios registros no se guardaron, verifique su informacion");
+                }
+              }
+            });
+      }});
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,411 @@
+body{
+      background-color: #e7e7e7;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: top center;
+}
+body > .grid {
+      height: 100%;
+}
+p{
+  font-size: 16px;
+}
+.justificatxt{
+  text-align: justify !important;
+}
+.centratxt{
+  text-align: center !important;
+}
+.izquierdatxt{
+  text-align: left !important;
+}
+.rowSegment{
+  padding:20px;
+    background-color: #e7e7e7;
+    text-align: center;
+}
+.lilcoment{
+
+}
+.hrefPlus{
+  text-decoration: none;
+}
+.hrefPlus:hover{
+  text-decoration: underline;
+}
+.footer{
+  margin-top: 0px;
+  background: #00285f;
+  border: 0px solid #f00000;
+  margin-bottom: 0px;
+  color: #fff;
+  padding: 35px;
+}
+.nobullets{
+  list-style: none !important;
+}
+.semicircularbutton{
+  border-radius: 0em 5em 5em 0em !important;
+  padding-left: 0px !important;
+  padding-right: 5px !important;
+}
+.sombrero{
+  -webkit-box-shadow: 0px 4px 19px -5px rgba(0,0,0,0.75) !important;
+  -moz-box-shadow: 0px 4px 19px -5px rgba(0,0,0,0.75) !important;
+  box-shadow: 0px 4px 19px -5px rgba(0,0,0,0.75) !important;
+}
+.fillima{
+  padding: 0px !important;
+  /*margin-left: -13px;
+  /* margin-right: 0px; */
+  width: 100% !important;
+  /* height: 510px; */
+  background-size: cover;
+  background-position: center;
+  object-fit: cover;
+  background-image: url(/imgs/wpp-login-1.jpg);
+}
+.fillContainer{
+  height: 100% !important;
+}
+.fixgrid{
+  margin: 0px !important;
+}
+.ui.search .prompt {
+  border-radius: 5px !important;
+}
+.flotaizq{
+  float:left !important;
+}
+.flotader{
+  float:right !important;
+}
+.alignCenter{
+  text-align: center !important;
+}
+.alignleft{
+  text-align: left !important;
+}
+.alignright{
+  text-align: right !important;
+}
+.negrea{
+  font-weight: bold;
+}
+.jalarriba{
+  margin-top:-5px !important;
+}
+.toolildivider{
+  height: 5px;
+}
+.lildivider{
+  height: 10px;
+}
+.minidivider{
+  height: 2px;
+}
+.bkwhite{
+  background-color: #FFFFFF !important;
+}
+.ftwhite{
+  color:#FFFFFF !important;
+}
+.ftrojillos{
+  color:#ff5406 !important;
+}
+.ftvendillo{
+  color:#43a047 !important;
+}
+.budgetcolor{
+  color:#00285f !important;
+}
+.slide{
+    width: 100%;
+    height: 350px;
+  /*  background-size: cover;
+    background-position: center;
+    object-fit:cover;
+    background-image: url('/imgs/wpp-login-1.jpg'); */
+}
+.colseparador{
+  border-right-style: solid;
+  border-color: #e7e7e7;
+  border-width: 2px;
+  width: 100% !important;
+  height: 100% !important;
+}
+.fontblk{
+  color: #212121 !important;
+}
+.fakehref{
+  cursor:pointer;
+  font-weight: bold;
+  color:#00245f !important;
+  text-decoration: none;
+}
+.fakehrefcolorless{
+  cursor:pointer;
+}
+.subtitleWhite{
+  font-weight: bold;
+  color: #ffffff !important;
+}
+.subtitleOrange{
+  font-weight: bold;
+  color: #ff8d00 !important;
+}
+.subtitleMoreGray{
+  font-weight: bold;
+  color: #9e9e9e !important;
+}
+.subtitleGray{
+  font-weight: bold;
+  color: #bdbdbd !important;
+}
+.textGray{
+  color: #bdbdbd !important;
+}
+.subtitleLightGray{
+  font-weight: bold;
+  color: #e7e7e7 !important;
+}
+.subtitleBlack{
+  font-weight: bold;
+  color: #212121 !important;
+}
+.subtitleBlue{
+  font-weight: bold;
+  color: #00245f !important;
+}
+.subtitleBrown{
+  font-weight: bold;
+  color: #b1973a;
+}
+.titleBlue{
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00245f !important;
+}
+.titleBrown{
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #b1973a !important;
+}
+.lilmenu{
+  background-color: #ffffff90 !important;
+  color:#00245f !important;
+  position: fixed;
+  left: 0px;
+  /*
+  width: 54px;
+  top:0px;
+  */
+  width: 190px;
+  height: 100%;
+  padding-top:40px;
+  -webkit-box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33);
+  -moz-box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33);
+  box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33);
+  z-index: 100;
+  text-align: left !important;
+  -webkit-transition: width 440ms; /* For Safari 3.1 to 6.0 */
+  transition: width 440ms;
+}
+.lilmenu>a{
+  color:#00245f !important;
+}
+.lilmenu:hover{
+  background-color: #ffffff !important;
+}
+.lilmenu>.item{
+  /*text-align: center;*/
+  display: block;
+  font-weight: bold;
+  padding:10px 10px 10px 15px;
+  border-bottom: solid 1px #e7e7e7 !important;
+  cursor:pointer;
+
+}
+.lilmenu>.item:hover{
+  background-color: #e7e7e7 !important;
+  -webkit-box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33);
+  -moz-box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33);
+  box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33);
+  /*color:#ffffff;*/
+}
+.lilmenu>.item.active{
+  background-color: #00245f !important;
+  color:#ffffff !important;
+  -webkit-box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33);
+  -moz-box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33);
+  box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33);
+}
+.notxtmenu{
+  width: 54px !important;
+}
+.notxtmenu>.item{
+  /*text-align: center;*/
+  padding:10px 10px 10px 13px !important;
+}
+.noTextMenu{
+  display: none;
+}
+.submenuacc{
+  background: rgba(255, 255, 255, 0.145) !important;
+  padding-left: 10px !important;
+  margin: 0px -15px !important;
+}
+.ui.accordion.active .title:not(.ui) {
+    color: #ffffff !important;
+}
+.ui.accordion .title:not(.ui) {
+  color:#00245f !important;
+}
+.acordionChild{
+  padding: 5px 0 5px 0 !important;
+}
+.causenotxt{
+  position: absolute;
+  right: -23px;
+  top: 55%;
+  background: #ffffff !important;
+  -webkit-box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33) !important;
+  -moz-box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33) !important;
+  box-shadow: 3px 2px 10px -5px rgba(0,0,0,0.33) !important;
+}
+.itemSelector{
+  padding: 5px;
+  cursor: pointer;
+  background-color: #f5f5f5;
+}
+.itemSelector:hover{
+  padding: 5px 5px 5px 10px;
+  background-color: #eeeeee;
+  border-bottom: solid 1px #e7e7e7;
+}
+.landingSearchBox{
+  top: 80% !important;
+  transform: translatey(-65%);
+  border-radius: 0.25em !important;
+}
+.bkgGris{
+  background-color: #bdbdbd !important;
+}
+.suscribor{
+  background: #1567ae;
+    /*padding: 20px;*/
+}
+.catElementListDis{
+  display: none;
+}
+
+/*----------------FFIXIADORES----------------*/
+.fixMarginLeft{
+  margin-left: 0px !important;
+}
+
+
+/*-----------------------------*/
+@-webkit-keyframes funtastic {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 51%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes funtastic {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 51%}
+    100%{background-position:0% 50%}
+}
+@keyframes funtastic {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 51%}
+    100%{background-position:0% 50%}
+}
+
+
+
+
+
+/*//////////////////////////////////////////////////////////*/
+.ui.teal.label{
+  background-color:#2b7483 !important;
+  border-color:#2b7483 !important;
+}
+.searchbox{
+  top: 50% !important;
+    transform: translatey(-65%);
+    background: rgba(0, 0, 0, 0.2) !important;
+    border-radius: 0.25em !important;
+}
+/*.
+.ui.grid{
+  margin-left: 0rem !important;
+}
+.ui.modal>.content{
+  padding:0 !important;
+}
+.ui.form .field>label{
+color:#2b7483 !important;
+font-weight:600;
+}
+image {
+      margin-top: -100px;
+}
+.column {
+      max-width: 450px;
+}
+*/
+/************** FONTS ****************************/
+@font-face {
+    font-family: 'BRegular';
+    src: url('fonts/avenir-next-regular.eot'); /* IE9 Compat Modes */
+    src: url('fonts/avenir-next-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('fonts/avenir-next-regular.woff') format('woff'), /* Modern Browsers */
+    url('fonts/avenir-next-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('fonts/avenir-next-regular.svg#regular') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+    font-family: 'BBold';
+    src: url('fonts/avenir-next-bold.eot'); /* IE9 Compat Modes */
+    src: url('fonts/avenir-next-bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('fonts/avenir-next-bold.woff') format('woff'), /* Modern Browsers */
+    url('fonts/avenir-next-bold.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('fonts/avenir-next-bold.svg#bold') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BItalic';
+    src: url('fonts/avenir-next-italic.eot'); /* IE9 Compat Modes */
+    src: url('fonts/avenir-next-italic.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('fonts/avenir-next-italic.woff') format('woff'), /* Modern Browsers */
+    url('fonts/avenir-next-italic.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('fonts/avenir-next-italic.svg#bold') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BDemi';
+    src: url('fonts/avenir-next-demi.eot'); /* IE9 Compat Modes */
+    src: url('fonts/avenir-next-demi.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('fonts/avenir-next-demi.woff') format('woff'), /* Modern Browsers */
+    url('fonts/avenir-next-demi.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('fonts/avenir-next-demi.svg#demi') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BDemiCn';
+    src: url('fonts/avenir-next-demicn.eot'); /* IE9 Compat Modes */
+    src: url('fonts/avenir-next-demicn.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('fonts/avenir-next-demicn.woff') format('woff'), /* Modern Browsers */
+    url('fonts/avenir-next-demicn.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('fonts/avenir-next-demicn.svg#demi') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+}

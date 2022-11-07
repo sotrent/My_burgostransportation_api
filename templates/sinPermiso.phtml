@@ -1,0 +1,96 @@
+<?php
+foreach (glob("/../Modules/*.php") as $filename){
+    include $filename;
+}
+use Modules\DESIGN;
+?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <?php
+      echo DESIGN::getBasicLibrary();
+    ?>
+    <style>
+      .ui.paddingless.segment{
+        padding: 0 !important;
+      }
+
+      .parent{
+        height: 100%;
+      }
+      .flex-center{
+        display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+      .box{
+        width: 600px;
+        height: 500px;
+
+      }
+      .moving-gradient{
+        background: linear-gradient(132deg, #ff5406, #fd8f3f, #ff5406);
+background-size: 600% 600%;
+
+-webkit-animation: moveGradient 19s ease infinite;
+-moz-animation: moveGradient 19s ease infinite;
+-o-animation: moveGradient 19s ease infinite;
+animation: moveGradient 19s ease infinite;
+      }
+/*
+      @keyframes moveGradient {
+        0%{ background-position: 0 50%; }
+        50%{ background-position: 100 50%; }
+        0%{ background-position: 0 50%; }
+      }*/
+
+
+      @-webkit-keyframes moveGradient {
+    0%{background-position:22% 0%}
+    50%{background-position:79% 100%}
+    100%{background-position:22% 0%}
+}
+@-moz-keyframes moveGradient {
+    0%{background-position:22% 0%}
+    50%{background-position:79% 100%}
+    100%{background-position:22% 0%}
+}
+@-o-keyframes moveGradient {
+    0%{background-position:22% 0%}
+    50%{background-position:79% 100%}
+    100%{background-position:22% 0%}
+}
+@keyframes moveGradient {
+    0%{background-position:22% 0%}
+    50%{background-position:79% 100%}
+    100%{background-position:22% 0%}
+}
+    </style>
+  </head>
+  <body class="moving-gradient">
+    <div class="ui grid fillContainer container ">
+      <div class="row">
+        <div class="middle aligned column">
+          <div class="ui segment">
+            <div class="ui grid">
+              <div class="five wide column" align="center">
+                <div class="ui hidden divider">  </div>
+                <h1> <i class="ban huge grey icon"></i></h1>
+                <h2>NO CUENTAS CON PERMISOS ADECUADOS</h2>
+                <div class="ui hidden divider">  </div>
+                <div class="ui hidden divider">  </div>
+              </div>
+              <div class="eleven wide column fillima">
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,421 @@
+<?php
+foreach (glob("/../Modules/*.php") as $filename){
+    include $filename;
+}
+use Modules\DESIGN;
+use Modules\AGENTS;
+?>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dashboard</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <?php  echo DESIGN::getBasicLibrary();  ?>
+    <link href="/lib/css/calentim.min.css" rel="stylesheet"/>
+    <script src="/lib/js/moment.min.js"></script>
+    <script src="/lib/js/calentim.min.js"></script>
+    <style>
+      .ui.paddingless.segment{
+        padding: 0 !important;
+      }
+      .configView{
+        padding: 10px 0px 0px 0px !important;;
+      }
+    </style>
+    <script type="text/javascript">
+      <?php
+      echo "console.log('".Modules\AUTH::checkPermisos("ADM","AGT")."');";
+        //$isValidAdmin=Modules\AUTH::checkPermisos("ADM","AGT");
+        $isValidAdmin="dw";
+      ?>
+    </script>
+  </head>
+  <body>
+    <div class="pusher">
+      <?php // echo DESIGN::renderMenuDesk(4);  ?>
+      <div class="configView">
+        <div class="ui raised segment">
+          <div class="ui top attached grey label">
+             <h4> <i class="ticket alternate icon"></i>RESERVAS</h4>
+          </div>
+          <div class="lildivider"></div>
+          <div class="">
+            <div class="flotaizq jalarriba">
+              <div class="ui mini icon green button" onclick="runExport()">
+                <i class="file excel icon"></i>
+              </div>
+              <div class="ui mini icon blue button" onclick="runExport()">
+                <i class="plus icon"></i>Nueva Reserva
+              </div>
+            </div>
+            <div class="flotader jalarriba">
+              <div class="ui  icon search" >
+                <div class="ui right action mini input">
+                  <input type="text" name="findt" id="findt" placeholder="Nombre o Referencia" autocomplete="off" >
+                  <a class="ui blue mini button" title="Buscar" onclick="showList('target',$('#findt').val())">
+                    &ensp;<i class="ui search icon"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="">&ensp;</div>
+          </div>
+          <div class="ui divider"></div>
+          <table class="ui selectable celled table" id="example" style="width:100% !important">
+            <thead>
+              <tr align="center">
+                <td class="one wide subtitleBlack">Folio</td>
+                <td class="two wide subtitleBlack">Cliente</td>
+                <td class="one wide subtitleBlack">Email</td>
+                <td class="one wide subtitleBlack">Telefono</td>
+                <td class="one wide subtitleBlack">Servicio</td>
+                <td class="two wide subtitleBlack">Origen</td>
+                <td class="two wide subtitleBlack">Destino</td>
+                <td class="one wide subtitleBlack">VCODE</td>
+                <td class="one wide subtitleBlack">Seats</td>
+                <td class="two wide subtitleBlack">PickUp</td>
+                <td class="subtitleBlack">Metodo</td>
+                <td class="one wide subtitleBlack">Total</td>
+                <td class="subtitleBlack">&ensp;</td>
+                <td class="subtitleBlack">&ensp;</td>
+              </tr>
+            </thead>
+            <tbody id="datamaster" style="font-size: .8rem;"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui viewReserva basic modal">
+      <i class="icon close" style="display:none;margin-" id="closmodview"></i>
+      <div class="ui segment" id="frmnewoff">
+        <div class="ui top attached blue label">
+          <div class="flotaizq">
+            RESERVA
+          </div>
+          <div class="flotader"><i class="icon close" onclick="$('#closmodview').trigger('click')"></i></div>
+        </div>
+        <div class="ui one column grid">
+          <div class="column" style="border-right: solid 1px #e7e7e7;">
+
+            <div class="">
+              <table class="ui very basic striped fixed table">
+                <tbody>
+                  <tr>
+                    <td class="" >
+                      <div class="subtitleBlue">
+                        <span class="lilcomment subtitleMoreGray">Folio:</span>&ensp; <span id="inIdRes"></span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="subtitleBlue" align="left">
+                        <span class="lilcomment subtitleMoreGray">Estatus:</span>&ensp;<span id="inEstatusADD" class="subtitleBlack"></span><span id="inEstatusEXADD" class="lilcomment subtitleMoreGray"></span>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="subtitleBlue" align="left">
+                        <span class="lilcomment subtitleMoreGray">Metodo de Pago:</span>&ensp;<span id="inEstatusPAY" class="subtitleBlack"></span>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td >
+                      <div class="subtitleBlue">
+                        <span class="lilcomment subtitleMoreGray">Zona: </span>&ensp;<span id="inZona"></span>
+                      </div>
+                    </td>
+                    <td class="">
+                      <div class="subtitleBlue">
+                        <span class="lilcomment subtitleMoreGray">Servicio:</span>&ensp; <span id="inServicio"></span>
+                      </div>
+                    </td>
+                    <td >
+                      <div class="subtitleBlue">
+                        <span class="lilcomment subtitleMoreGray">Vehiculo: </span>&ensp;<span id="inVehicle"></span>
+                      </div>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="">
+                      <div class="subtitleBlue">
+                        <span class="lilcomment subtitleMoreGray">Adultos:</span>&ensp; <span id="inAdults"></span>
+                      </div>
+                    </td>
+                    <td class="">
+                      <div class="subtitleBlue">
+                        <span class="lilcomment subtitleMoreGray">Niños:</span>&ensp; <span id="inKids"></span>
+                      </div>
+                    </td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="">
+                      <div class="subtitleBlue">
+                        <span class="lilcomment subtitleMoreGray">Parada:</span>&ensp; <span id="inStop"></span>
+                      </div>
+                    </td>
+                    <td class="">
+                      <div class="subtitleBlue">
+                        <span class="lilcomment subtitleMoreGray">Child Seat:</span>&ensp; <span id="inChildSeat"></span>
+                      </div>
+                    </td>
+                    <td class="">
+                      <div class="subtitleBlue">
+                        <span class="lilcomment subtitleMoreGray">Booster Seat:</span>&ensp; <span id="inBoosterSeat"></span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="ui horizontal divider">
+              <b>INFORMACION DE CONTACTO</b>
+            </div>
+            <table class="ui very basic striped fixed table">
+              <tbody>
+                <tr></tr>
+                <tr>
+                  <td class="">
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Nombre:</span>&ensp; <span id="inClie"></span>
+                    </div>
+                  </td>
+                  <td class="">
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Email:</span>&ensp;<span id="inEmail"></span>
+                    </div>
+                  </td>
+                  <td class="">
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Tel:</span>&ensp;<span id="inTel"></span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="ui horizontal divider" align="left">
+              <b>ARRIVAL</b>
+            </div>
+            <table class="ui very basic striped fixed table">
+              <tbody>
+                <tr></tr>
+                <tr>
+                  <td class="">
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Origen: </span><span id="inArrOrigen"></span>
+                    </div>
+                  </td>
+                  <td class="">
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Destino: </span><span id="inArrDestino"></span>
+                    </div>
+                  </td>
+                  <td >
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">PickUp: </span>&ensp;<span id="inDtArrPickup"></span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Aerolinea:</span>&ensp;<span id="inArrAirline"></span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Vuelo:</span>&ensp;<span id="inArrFlight"></span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Llegada:</span>&ensp;<span id="inDtArrAirPick"></span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="ui horizontal divider" align="left">
+              <b>DEPARTURE</b>
+            </div>
+            <table class="ui very basic striped fixed table">
+              <tbody>
+                <tr></tr>
+                <tr>
+                  <td class="">
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Origen: </span><span id="inDepOrigen"></span>
+                    </div>
+                  </td>
+                  <td class="">
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Destino: </span><span id="inDepDestino"></span>
+                    </div>
+                  </td>
+                  <td >
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">PickUp: </span>&ensp;<span id="inDtDepPickup"></span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Aerolinea:</span>&ensp;<span id="inDepAirline"></span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Vuelo:</span>&ensp;<span id="inDepFlight"></span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="subtitleBlue">
+                      <span class="lilcomment subtitleMoreGray">Llegada:</span>&ensp;<span id="inDtDepAirPick"></span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <table class="ui very basic striped fixed table">
+              <tbody>
+                <tr></tr>
+                <tr>
+                  <td colspan="3">
+                    <div class="subtitleBlue" align="center">
+                      <span class="lilcomment subtitleMoreGray">Total:</span>&ensp;$<span id="inTotal" class="subtitleBlack"></span> USD
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="ui export mini basic modal">
+  <i class="icon close" style="display:none;margin-" id="closmod"></i>
+  <div class="ui segment" id="frmnewoff">
+    <div class="ui top attached blue label">
+      <div class="flotaizq">
+        Exportar
+      </div>
+      <div class="flotader"><i class="icon close" onclick="$('#closmod').trigger('click')"></i></div>
+    </div>
+    <div class="toolildivider"></div>
+    <form class="ui form" action="/exportador" method="post" target="_blank" >
+      <input type="hidden" name="report" id="report" value="generacion">
+      <div class="field">
+        <label for="">Periodo</label>
+      </div>
+      <div class="fields"  align="center">
+        <div class="field">
+          <div class="ui mini input">
+            <input class="calendas" type="date" name="btInicio" id="btInicio" value="" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui mini input">
+            <input class="calendas" type="date" name="btFin" id="btFin" value="" placeholder="YYYY-MM-DD" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}">
+          </div>
+        </div>
+
+      </div>
+      <div class="ui divider">
+
+      </div>
+
+      <div class="field" align="center">
+        <input type="submit" name="genfiles" value="Generar" class="ui mini icon blue button">
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+    <div class="ui asignagentmod mini basic modal">
+      <i class="icon close" style="display:none;" id="closmodchofx"></i>
+      <div class="ui segment" id="frmnewoff">
+        <div class="ui top attached blue label">
+          <div class="flotaizq">
+            Asignar a <span id="asignagentlbl"></span>
+          </div>
+          <div class="flotader"><i class="icon close" onclick="$('#closmodchofx').trigger('click')"></i></div>
+        </div>
+        <div class="toolildivider"></div>
+        <div class="ui asignagentfrm form">
+          <input type="hidden" name="idResAtAsign" id="idResAtAsign">
+          <div class="field">
+            <label for="">Conductor</label>
+            <select name="idAgtToAsing" id="idAgtToAsing" class="ui dropdown mini input">
+              <option value="">Seleccionar</option>
+              <?php
+                $temp["mode"]='selectlist';
+                $driversList=AGENTS::getList($temp);
+                foreach ($driversList as $key => $value) {
+                  echo '<option value="'.$value["user"].'">'.$value["name"].'</option>';
+                }
+              ?>
+            </select>
+          </div>
+          <div class="ui divider"></div>
+          <div class="field" align="right">
+            <div class="ui blue submit mini button">
+              <i class="check icon"></i>  Asignar
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <?php echo DESIGN::getExtendedLibraryNotGlobal(); ?>
+    <script src="/lib/js/globalReservas.js?de=54"></script>
+
+    <!--
+    <script src="/lib/js/calendas.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+-->
+    <script type="text/javascript">
+      showList();
+      function showReserva(){
+        $('.ui.viewReserva.modal').modal('show');
+      }
+      $(".bgt").click(function(){
+        $(".bgt").removeClass('active');
+        $(this).addClass('active');
+      });
+      function runExport(){
+        $(".ui.export.modal").modal('show');
+      }
+      $('.ui.asignagentfrm.form').form({ fields:{
+          idAgtToAsing:{ identifier:'idAgtToAsing', rules:[{ type   : 'empty',      prompt : ''}]},
+          idResAtAsign:{ identifier:'idResAtAsign', rules:[{ type   : 'empty', prompt : ''}]}
+        },onSuccess: function(event, fields){
+            $.ajax({
+              url: "/asingAgentToRes", type: 'POST', data: fields ,
+              success: function(data) {
+                console.log(data);
+                if(data==1){
+                  tostadora(1,"Agente asignado correctamente");
+                  $('.ui.asignagentmod.modal').modal('hide');
+                  showList();
+                }else{
+                  tostadora(4,"Uno o varios registros no se guardaron, verifique su informacion");
+                }
+              }
+            });
+      }});
+    </script>
+  </body>
+</html>
